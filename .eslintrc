@@ -1,0 +1,9 @@
+{
+    "extends": [
+        "react-app",
+        "standard"
+    ],
+    "rules": {
+        "space-before-function-parent": 0
+    }
+}
