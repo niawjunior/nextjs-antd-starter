@@ -9,9 +9,9 @@ const userSchema = new Schema({
     email: {
         type: String,
         unique: true,
-        lowercase: true
+        lowercase: true,
     },
-    password: String
+    password: String,
 });
 
 // encrypt password before saving a model

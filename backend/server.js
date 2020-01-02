@@ -9,7 +9,7 @@ const router = require('./router');
 const app = express();
 mongoose.connect(db, {
     useNewUrlParser: true,
-    useCreateIndex: true
+    useCreateIndex: true,
 });
 
 app.use(morgan('combined'));
@@ -20,5 +20,6 @@ app.use(bodyParser.json({ type: '*/*' }));
 router(app);
 
 app.listen(port, () => {
+    // eslint-disable-next-line no-console
     console.log(`Server started on port  + ${port}`);
 });

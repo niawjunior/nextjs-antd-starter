@@ -7,20 +7,18 @@ function tokenForUser(user) {
     return jwt.encode({ sub: user.id, iat: timestamp }, secret);
 }
 
-exports.signin = function (req, res) {
+exports.signin = (req, res) => {
     res.send({ token: tokenForUser(req.user) });
 };
 
-exports.signup = function (req, res, next) {
-    const email = req.body.email;
-    const password = req.body.password;
-    console.log(email)
-    console.log(password)
+exports.signup = (req, res, next) => {
+    const { email } = req.body;
+    const { password } = req.body;
     if (!email || !password) {
         return res.status(422).send({ error: 'Email and password must be provided' });
     }
 
-    User.findOne({ email: email }, function (err, existingUser) {
+    return User.findOne({ email }, (err, existingUser) => {
         if (err) {
             return next(err);
         }
@@ -30,15 +28,15 @@ exports.signup = function (req, res, next) {
         }
 
         const user = new User({
-            email: email,
-            password: password
+            email,
+            password,
         });
 
-        user.save(function (err) {
-            if (err) {
-                return next(err);
+        return user.save(e => {
+            if (e) {
+                return next(e);
             }
-            res.json({ token: tokenForUser(user) });
+            return res.json({ token: tokenForUser(user) });
         });
     });
 };

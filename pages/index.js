@@ -5,7 +5,24 @@ import { Tag } from 'antd';
 import Nav from '../components/nav'
 
 const Home = () => {
-  const users = [1, 2, 3, 4, 5]
+  const users = [{
+    id: 1,
+    name: 1,
+  },
+  {
+    id: 2,
+    name: 2,
+  },
+  {
+    id: 3,
+    name: 3,
+  },
+  {
+    id: 4,
+    name: 4,
+  },
+
+  ]
   return (
     <div>
       <Head>
@@ -14,12 +31,11 @@ const Home = () => {
       <Nav />
       <div>
         {
-          users.map((user, key) => (
-            <Link key={key} href="/users/[user]" as={`/users/${user}`}>
+          users.map(({ name, id }) => (
+            <Link key={id} href="/users/[user]" as={`/users/${name}`}>
               <Tag color="blue">
-                {' '}
                 User
-                {user}
+                {name}
               </Tag>
             </Link>
           ))

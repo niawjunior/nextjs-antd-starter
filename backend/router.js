@@ -1,25 +1,25 @@
-const Authentication = require('./controllers/authentication');
 const passport = require('passport');
+const Authentication = require('./controllers/authentication');
 require('./services/passport');
 
 const requireAuth = passport.authenticate('jwt', {
-    session: false
+    session: false,
 });
 const requireSignIn = passport.authenticate('local', {
-    session: false
+    session: false,
 });
 
-module.exports = function (app) {
+module.exports = app => {
 
     // Test endpoint
-    app.get('/api/', function (req, res) {
+    app.get('/api/', (req, res) => {
         res.send('200OK');
     });
 
     // Validate user
-    app.get('/api/validate', requireAuth, function (req, res) {
+    app.get('/api/validate', requireAuth, (req, res) => {
         res.send({
-            user: req.user.email
+            user: req.user.email,
         });
     });
 
